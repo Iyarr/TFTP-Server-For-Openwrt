@@ -1,0 +1,13 @@
+FROM debian:bookworm-slim
+
+RUN apt update && apt upgrade && \
+    apt install -y sftpd-hpa
+
+COPY ./tftpd-hpa /etc/default/tftpd-hpa
+# https://downloads.openwrt.org/releases/23.05.3/targets/ramips/mt7621/\openwrt-23.05.3-ramips-mt7621-buffalo_wsr-1166dhp-squashfs-sysupgrade.bin
+RUN curl https://downloads.openwrt.org/releases/23.05.3/targets/ramips/mt7621/openwrt-23.05.3-ramips-mt7621-buffalo_wsr-1166dhp-initramfs-kernel.bin \
+            -o /src/tftp/linux.trx-recovery
+
+WORKDIR /home
+RUN curl https://downloads.openwrt.org/releases/23.05.3/targets/ramips/mt7621/\openwrt-23.05.3-ramips-mt7621-buffalo_wsr-1166dhp-squashfs-sysupgrade.bin
+

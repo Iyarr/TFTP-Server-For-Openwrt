@@ -1,0 +1,9 @@
+services:
+  sftp:
+    build: ./sftp
+    ports:
+      69:69
+  test:
+    build: ./test
+
+    
